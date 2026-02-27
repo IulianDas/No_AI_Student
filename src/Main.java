@@ -1,3 +1,6 @@
+import exercise_four.ExerciseFour;
+import exercise_one.ExerciseOne;
+import exercise_three.ExerciseThree;
 import exercise_two.ExerciseTwo;
 
 import java.util.Scanner;
@@ -5,39 +8,42 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        ExerciseOne exercise1 = new ExerciseOne();
         ExerciseTwo exercise2 = new ExerciseTwo();
-        boolean token = true;
+        ExerciseThree exercise3 = new ExerciseThree();
+        ExerciseFour exercise4= new ExerciseFour();
+        boolean tokenMenu = true;
 
-        while (token) {
-            System.out.println("________________________________________________\n " +
-                            "\tWhat do you want to check from ExerciseTwo:\n \t\t " +
-                            "1) Exercise to reverse the row.\n  \t\t " +
-                            "2) Exercise with second biggest number from matrix.\n \t\t " +
-                            "3) Fibonacci until the number.\n \t\t " +
-                            "4) Fibonacci recursive.\n \t\t" +
-                            " 5) Exit.\n" +
-                            "________________________________________________" );
+        while(tokenMenu) {
+            System.out.print("\n------------ Main Menu -------------\n" +
+                    "\tChose exercise to test:\n" +
+                    "\t\t1) Exercise One\n" +
+                    "\t\t2) Exercise Two\n" +
+                    "\t\t3) Exercise Three\n" +
+                    "\t\t4) Exercise Four\n" +
+                    "\t\t0) Exit" +
+                    "\n------------------------------------\n");
+
             Scanner menu = new Scanner(System.in);
-            int choise = menu.nextInt();
+            int menuChoise = menu.nextInt();
 
-            switch (choise){
+            switch (menuChoise) {
                 case 1:
-                    exercise2.myFirst();
+                    exercise1.exerciseOneMenu();
                     break;
                 case 2:
-                    exercise2.mySecond();
+                    exercise2.exerciseTwoMenu();
                     break;
                 case 3:
-                    exercise2.myThird();
+                    exercise3.exerciseThreeMenu();
                     break;
                 case 4:
-                    exercise2.myFourth();
+                    exercise4.exerciseFourMenu();
                     break;
-                case 5:
-                    token = false;
+                case 0:
+                    tokenMenu = false;
                     break;
             }
         }
-
     }
 }

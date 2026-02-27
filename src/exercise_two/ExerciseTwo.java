@@ -3,6 +3,39 @@ import java.util.Scanner;
 
 public class ExerciseTwo{
 
+    public void exerciseTwoMenu(){
+        boolean tokenTask2 = true;
+        while (tokenTask2) {
+            System.out.println("\n------------ Exercise Two -------------\n " +
+                    "\tWhat do you want to check from Exercise Two:\n \t\t " +
+                    "1) Exercise to reverse the row.\n  \t\t " +
+                    "2) Exercise with second biggest number from matrix.\n \t\t " +
+                    "3) Fibonacci until the number.\n \t\t " +
+                    "4) Fibonacci recursive.\n \t\t" +
+                    " 0) Exit.\n" +
+                    "---------------------------------------\n");
+            Scanner menu = new Scanner(System.in);
+            int choiseExerciseTwo = menu.nextInt();
+
+            switch (choiseExerciseTwo) {
+                case 1:
+                    myFirst();
+                    break;
+                case 2:
+                    mySecond();
+                    break;
+                case 3:
+                    myThird();
+                    break;
+                case 4:
+                    myFourth();
+                    break;
+                case 0:
+                    tokenTask2 = false;
+                    break;
+            }
+        }
+    }
     public void myFirst(){
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter the row:");
@@ -19,9 +52,9 @@ public class ExerciseTwo{
         int max = 0;
         int[][] myMatrix = { {1,5,6}
                             ,{7,3,6}
-                            ,{9,10,2} };
+                            ,{11,10,2} };
 
-        for(int i = 0; i < myMatrix.length; i++){
+        for (int i = 0; i < myMatrix.length; i++){
             System.out.println("\n");
             for(int j = 0; j < myMatrix[i].length; j++) {
             System.out.print(myMatrix[i][j] + " ");
@@ -29,12 +62,14 @@ public class ExerciseTwo{
         }
         System.out.println("\n");
 
-        for(int i = 0; i < myMatrix.length; i++){
+        for (int i = 0; i < myMatrix.length; i++){
             for(int j = 0; j < myMatrix[i].length; j++){
                 if( myMatrix[i][j] > max){
                    cache = max;
                    max = myMatrix[i][j];
-               }
+               } else if (myMatrix[i][j] > cache) {
+                    cache = myMatrix[i][j];
+                }
             }
         }
         System.out.print("The second biggest number is: " + cache);
@@ -52,15 +87,15 @@ public class ExerciseTwo{
 
         System.out.print("Fibonacci series numbers are: ");
 
-        if(fibonacciNum == 0){
+        if (fibonacciNum == 0){
             System.out.print(" 0 ");
             System.out.print("\nDone\n");
         }
         else {
             System.out.print(number1 + "  " + number2 + "  ");
-            while(fibonacciNum > total){
+            while (fibonacciNum > total){
                 total = number1 + number2;
-                if(fibonacciNum >= total){
+                if (fibonacciNum >= total){
                     System.out.print(total + "  ");
                 }
                 number1 = number2;
@@ -81,9 +116,9 @@ public class ExerciseTwo{
         Scanner keyboard = new Scanner(System.in);
         int fibonacciNum = keyboard.nextInt();
 
-        while(fibonacciNum > total){
+        while (fibonacciNum > total){
             total = number1 + number2;
-            if(fibonacciNum >= total){
+            if (fibonacciNum >= total){
             counter= counter+1;
             }
             number1 = number2;
