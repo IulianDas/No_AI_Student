@@ -1,26 +1,24 @@
-import exercise_four.ExerciseFour;
-import exercise_one.ExerciseOne;
-import exercise_three.ExerciseThree;
-import exercise_two.ExerciseTwo;
+import oop.OOP;
+import syntax.SyntaxMenu;
+import syntax.exercise_four.ExerciseFour;
+import syntax.exercise_one.ExerciseOne;
+import syntax.exercise_three.ExerciseThree;
+import syntax.exercise_two.ExerciseTwo;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        ExerciseOne exercise1 = new ExerciseOne();
-        ExerciseTwo exercise2 = new ExerciseTwo();
-        ExerciseThree exercise3 = new ExerciseThree();
-        ExerciseFour exercise4= new ExerciseFour();
+        SyntaxMenu syntaxMenu = new SyntaxMenu();
+        OOP oopMenu = new OOP();
         boolean tokenMenu = true;
 
-        while(tokenMenu) {
+        while (tokenMenu){
             System.out.print("\n------------ Main Menu -------------\n" +
                     "\tChose exercise to test:\n" +
-                    "\t\t1) Exercise One\n" +
-                    "\t\t2) Exercise Two\n" +
-                    "\t\t3) Exercise Three\n" +
-                    "\t\t4) Exercise Four\n" +
+                    "\t\t1) Exercise One with Java Syntax\n" +
+                    "\t\t2) Exercise Two with OOP Principles\n" +
                     "\t\t0) Exit" +
                     "\n------------------------------------\n");
 
@@ -29,21 +27,16 @@ public class Main {
 
             switch (menuChoise) {
                 case 1:
-                    exercise1.exerciseOneMenu();
+                    syntaxMenu.syntaxMenu();
                     break;
                 case 2:
-                    exercise2.exerciseTwoMenu();
-                    break;
-                case 3:
-                    exercise3.exerciseThreeMenu();
-                    break;
-                case 4:
-                    exercise4.exerciseFourMenu();
+                    oopMenu.oopMenu();
                     break;
                 case 0:
                     tokenMenu = false;
                     break;
             }
         }
+
     }
 }

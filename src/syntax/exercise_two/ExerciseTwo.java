@@ -1,4 +1,4 @@
-package exercise_two;
+package syntax.exercise_two;
 import java.util.Scanner;
 
 public class ExerciseTwo{
