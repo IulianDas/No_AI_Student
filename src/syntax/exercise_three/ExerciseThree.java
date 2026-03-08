@@ -1,4 +1,4 @@
-package exercise_three;
+package syntax.exercise_three;
 
 import java.util.Arrays;
 import java.util.Scanner;
