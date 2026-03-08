@@ -13,8 +13,10 @@ public class OtherPrinciples {
 
             System.out.print("\n------------ Other Principles -------------\n" +
                     "\tChose exercise to test:\n" +
-                    "\t\t1) DRY (Don't Repeat Yourself)\n" +
-                    "\t\t2) KISS (Keep It Simple Stupid)\n" +
+                    "\t\t1) DRY ( Don't Repeat Yourself )\n" +
+                    "\t\t2) KISS ( Keep It Simple Stupid )\n" +
+                    "\t\t3) SOLID ()\n" +
+                    "\t\t3) YAGNI ( You Aren't Going to Need It )\n" +
                     "\t\t0) Exit" +
                     "\n------------------------------\n");
 

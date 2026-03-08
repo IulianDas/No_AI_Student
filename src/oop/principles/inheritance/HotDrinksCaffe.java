@@ -2,15 +2,30 @@ package oop.principles.inheritance;
 
 public class HotDrinksCaffe {
 
-    public String drinkName = "Any Drink!";
-    public String drinkPrice = "5$";
+    private String drinkName;
+    private String drinkPrice;
 
-    public String orderDrink (){
+    public HotDrinksCaffe() {
+    }
+
+    public HotDrinksCaffe(String drinkName, String drinkPrice){
+        this.drinkName = drinkName;
+        this.drinkPrice = drinkPrice;
+    }
+
+    public void setDrinkPrice(String drinkPrice) {
+        this.drinkPrice = drinkPrice;
+    }
+
+    public void setDrinkName(String drinkName) {
+        this.drinkName = drinkName;
+    }
+
+    public String getDrinkName() {
         return drinkName;
     }
 
-    public String orderPrice (){
+    public String getDrinkPrice() {
         return drinkPrice;
     }
-
 }

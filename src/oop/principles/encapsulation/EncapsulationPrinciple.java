@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class EncapsulationPrinciple {
 
-    EncapsulationExample encapsulationExample = new EncapsulationExample();
 
     public void encapsulationPrinciple(){
+        EncapsulationExample encapsulationExample = new EncapsulationExample();
 
         //Encapsulation stands to control access to data
         //To access data and modify, is used setters and getters

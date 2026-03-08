@@ -1,17 +1,9 @@
 package oop.principles.inheritance;
 
-public class Americano extends HotDrinksCaffe{
+public class Americano extends HotDrinksCaffe {
 
-    public String name = "Americano El Grande";
-    public String price = "4$";
-
-    @Override
-    public String orderDrink() {
-        return this.name;
+    public Americano(String drinkName, String drinkPrice){
+        super(drinkName,drinkPrice);
     }
 
-    @Override
-    public String orderPrice() {
-        return this.price;
-    }
 }

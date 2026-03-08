@@ -4,16 +4,18 @@ import oop.principles.inheritance.HotDrinksCaffe;
 
 public class Espresso extends HotDrinksCaffe {
 
-    public String name = "Espresso Italiano";
-    public String price = "3$";
-
-    @Override
-    public String orderDrink() {
-        return this.name;
+    public Espresso(String drinkName, String drinkPrice){
+        super(drinkName,drinkPrice);
     }
 
-    @Override
-    public String orderPrice() {
-        return this.price;
+    public Espresso() {
+        super();
+    }
+
+    public void setEspresso(){
+        super.setDrinkName("Espresso");
+    }
+    public void setEspresso(String drinkName){
+        super.setDrinkName(drinkName);
     }
 }

@@ -1,5 +1,6 @@
 package oop;
 
+import oop.principles.abstraction.AbstractImpl;
 import oop.principles.abstraction.AbstractionPrinciple;
 import oop.principles.encapsulation.EncapsulationPrinciple;
 import oop.principles.inheritance.InheritancePrinciple;
@@ -10,15 +11,22 @@ import java.util.Scanner;
 
 public class OOP {
 
-    AbstractionPrinciple abstraction = new AbstractionPrinciple();
-    EncapsulationPrinciple encapsulation = new EncapsulationPrinciple();
-    InheritancePrinciple inheritance = new InheritancePrinciple();
-    PolymorphismPrinciple poly = new PolymorphismPrinciple();
-    OtherPrinciples others = new OtherPrinciples();
+    private final EncapsulationPrinciple encapsulation ;
+    private final InheritancePrinciple inheritance;
+    private final PolymorphismPrinciple poly;
+    private final OtherPrinciples others;
+
+    public OOP() {
+        this.encapsulation = new EncapsulationPrinciple();
+        this.inheritance = new InheritancePrinciple();
+        this.poly = new PolymorphismPrinciple();
+        this.others = new OtherPrinciples();
+    }
 
 
     public void oopMenu() {
         boolean tokenOOP = true;
+        AbstractionPrinciple abstractionPrinciple = new AbstractImpl();
 
         while (tokenOOP) {
             System.out.print("\n------------ Main Menu -------------\n" +
@@ -36,7 +44,7 @@ public class OOP {
 
             switch (menuChoise) {
                 case 1:
-                    abstraction.abstractionPrinciple();
+                    abstractionPrinciple.abstractionPrinciple();
                     break;
                 case 2:
                     encapsulation.encapsulationPrinciple();
