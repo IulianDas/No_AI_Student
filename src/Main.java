@@ -1,16 +1,41 @@
-import oop.OOP;
-import syntax.SyntaxMenu;
-import syntax.exercise_four.ExerciseFour;
-import syntax.exercise_one.ExerciseOne;
-import syntax.exercise_three.ExerciseThree;
-import syntax.exercise_two.ExerciseTwo;
+import learnEnglish.repository.UserRepository;
+import learnEnglish.service.UserService;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        SyntaxMenu syntaxMenu = new SyntaxMenu();
+        //ToDO Eto esheo siroi proekt
+
+
+        boolean tokenMenu = true;
+        UserRepository userRepository = new learnEnglish.repository.impl.UserRepository();
+        UserService userService = new learnEnglish.service.impl.UserService();
+
+        while (tokenMenu){
+        System.out.print("\n--------- English Lesson -----------\n"
+                +"\t\n"
+                +"\t\t1) Login\n"
+                +"\t\t2) Register\n"
+                +"\t\t0) Exit\n"
+                +"\n------------------------------------\n");
+
+            Scanner menu = new Scanner(System.in);
+            int menuChoise = menu.nextInt();
+            switch (menuChoise) {
+                case 1:
+                    userService.authentication(userRepository);
+                    break;
+                case 2:
+                    userService.registration(userRepository);
+                    break;
+                case 0:
+                    tokenMenu = false;
+                    break;
+            }
+
+        /*SyntaxMenu syntaxMenu = new SyntaxMenu();
         OOP oopMenu = new OOP();
         boolean tokenMenu = true;
 
@@ -36,7 +61,8 @@ public class Main {
                     tokenMenu = false;
                     break;
             }
-        }
+        }*/
 
+    }
     }
 }
