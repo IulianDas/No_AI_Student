@@ -1,17 +1,29 @@
 import learnEnglish.repository.UserRepository;
+import learnEnglish.repository.impl.UserRepositoryImpl;
+import learnEnglish.resources.Resource;
+import learnEnglish.resources.impl.ResourceImpl;
+import learnEnglish.service.AdminMenu;
+import learnEnglish.service.CourseMenu;
 import learnEnglish.service.UserService;
+import learnEnglish.service.impl.AdminMenuImpl;
+import learnEnglish.service.impl.CourseMenuImpl;
+import learnEnglish.service.impl.UserServiceImpl;
 
 import java.util.Scanner;
 
 public class Main {
+
+    private static final UserRepository userRepository = new UserRepositoryImpl();
+    private static final CourseMenu courseMenu = new CourseMenuImpl();
+    private static final AdminMenu adminMenu = new AdminMenuImpl();
+    private static final Resource resource = new ResourceImpl();
+    private static final UserService userService = new UserServiceImpl(userRepository, courseMenu, adminMenu,resource);
+
     public static void main(String[] args) {
 
         //ToDO Eto esheo siroi proekt
 
-
         boolean tokenMenu = true;
-        UserRepository userRepository = new learnEnglish.repository.impl.UserRepository();
-        UserService userService = new learnEnglish.service.impl.UserService();
 
         while (tokenMenu){
         System.out.print("\n--------- English Lesson -----------\n"
@@ -25,15 +37,17 @@ public class Main {
             int menuChoise = menu.nextInt();
             switch (menuChoise) {
                 case 1:
-                    userService.authentication(userRepository);
+                    userService.authentication();
                     break;
                 case 2:
-                    userService.registration(userRepository);
+                    userService.registration();
                     break;
                 case 0:
                     tokenMenu = false;
                     break;
             }
+
+
 
         /*SyntaxMenu syntaxMenu = new SyntaxMenu();
         OOP oopMenu = new OOP();
@@ -65,4 +79,5 @@ public class Main {
 
     }
     }
+
 }

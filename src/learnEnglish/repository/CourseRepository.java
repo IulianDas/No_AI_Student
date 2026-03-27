@@ -5,7 +5,7 @@ import learnEnglish.entity.Course;
 import java.util.List;
 
 public interface CourseRepository {
-    Course getCourse();
+    Course getCourse(int courseId);
     String getCourseName(Course course);
     List<Course> getAllCourses();
     List<Course> getOnlyStartedCourses();
@@ -13,4 +13,6 @@ public interface CourseRepository {
     void setCourse(Course course);
     void removeCourse();
     void setCourse();
+    List<Course> getAllInit();
+    void initDB(List<Course> courses);
 }

@@ -8,10 +8,9 @@ public class Course {
     private String name;
     private List<Lesson> lessons;
 
-    public Course(int id, String name, List<Lesson> lessons) {
+    public Course(int id, String name) {
         this.id = id;
         this.name = name;
-        this.lessons = lessons;
     }
 
     public Course() {
@@ -42,6 +41,12 @@ public class Course {
         this.id = id;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lessons=" + lessons +
+                '}';
+    }
 }

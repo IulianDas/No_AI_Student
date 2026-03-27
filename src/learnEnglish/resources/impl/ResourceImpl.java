@@ -1,6 +1,6 @@
 package learnEnglish.resources.impl;
 
-public class Resource implements learnEnglish.resources.Resource {
+public class ResourceImpl implements learnEnglish.resources.Resource {
     @Override
     public void loading() throws InterruptedException {
 

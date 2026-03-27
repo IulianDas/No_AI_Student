@@ -7,13 +7,14 @@ public class Lesson {
     private String description;
     private String paragraph;
     private Quiz quiz;
+    private int courseId;
 
-    public Lesson(int id, String topic, String description, String paragraph, Quiz quiz) {
+    public Lesson(int id, String topic, String description, String paragraph, int courseId) {
         this.id = id;
         this.topic = topic;
         this.description = description;
         this.paragraph = paragraph;
-        this.quiz = quiz;
+        this.courseId = courseId;
     }
 
     public int getId() {
@@ -54,5 +55,24 @@ public class Lesson {
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", topic='" + topic + '\'' +
+                ", description='" + description + '\'' +
+                ", paragraph='" + paragraph + '\'' +
+                ", quiz=" + quiz +
+                '}';
     }
 }

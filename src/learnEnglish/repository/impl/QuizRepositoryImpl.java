@@ -2,11 +2,12 @@ package learnEnglish.repository.impl;
 
 import learnEnglish.entity.Question;
 import learnEnglish.entity.Quiz;
+import learnEnglish.repository.QuizRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizRepository implements learnEnglish.repository.QuizRepository {
+public class QuizRepositoryImpl implements QuizRepository {
 
     private Question question;
     private static List<Quiz> quizRepository = new ArrayList<>();
@@ -19,5 +20,10 @@ public class QuizRepository implements learnEnglish.repository.QuizRepository {
     @Override
     public void setQuiz() {
 
+    }
+
+    @Override
+    public List<Quiz> getAllQuiz() {
+        return List.of();
     }
 }

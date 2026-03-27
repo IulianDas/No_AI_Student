@@ -5,13 +5,15 @@ import learnEnglish.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements learnEnglish.repository.UserRepository {
+public class UserRepositoryImpl implements learnEnglish.repository.UserRepository {
 
     private static final User admin = new User(0,"admin","admin");
+    private static final User user = new User(0,"exam@mail.com","123");
     private static List<User> users = new ArrayList<>();
 
-    public UserRepository() {
+    public UserRepositoryImpl() {
         users.add(admin);
+        users.add(user);
     }
 
     public int getSize() {
@@ -33,7 +35,7 @@ public class UserRepository implements learnEnglish.repository.UserRepository {
     }
 
     @Override
-    public int checkUser(UserRepository repository, String email) {
+    public int checkUser(UserRepositoryImpl repository, String email) {
         int position = 0;
         for (int i = 0; i <= repository.getSize()-1; i++) {
             if (repository.getUser(i).getEmail().equals(email)) {

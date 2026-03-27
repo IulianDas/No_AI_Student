@@ -1,23 +1,26 @@
 package learnEnglish.repository.impl;
 
 import learnEnglish.entity.Course;
-import learnEnglish.entity.Lesson;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class CourseRepository implements learnEnglish.repository.CourseRepository {
+public class CourseRepositoryImpl implements learnEnglish.repository.CourseRepository {
 
-    private static List<Lesson> lesson = new LessonRepository().getLessons();
-    private static List<Course> courses = new ArrayList<>();
-    private static Course course = new Course(01,"Who are you lesson", (List<Lesson>) lesson);
+    private List<Course> courses;
+    private static Course course = new Course(1,"Who are you lesson");
+    private static List<Course> coursesToInit = Arrays.asList(course);
 
-    public CourseRepository() {
+    public CourseRepositoryImpl() {
+    }
+
+    public void initDB(List<Course> courses){
+        this.courses = courses;
     }
 
     @Override
-    public Course getCourse() {
-        return course;
+    public Course getCourse(int courseId) {
+        return courses.stream().findFirst().filter(course1 -> course1.getId() == courseId).orElseGet(Course::new);
     }
 
     @Override
@@ -48,6 +51,11 @@ public class CourseRepository implements learnEnglish.repository.CourseRepositor
     @Override
     public void setCourse() {
 
+    }
+
+    @Override
+    public List<Course> getAllInit() {
+        return coursesToInit;
     }
 
     @Override
