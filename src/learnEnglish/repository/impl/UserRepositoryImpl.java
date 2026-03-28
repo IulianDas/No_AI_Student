@@ -7,13 +7,11 @@ import java.util.List;
 
 public class UserRepositoryImpl implements learnEnglish.repository.UserRepository {
 
-    private static final User admin = new User(0,"admin","admin");
-    private static final User user = new User(0,"exam@mail.com","123");
     private final List<User> users = new ArrayList<>();
 
     public UserRepositoryImpl() {
-        users.add(admin);
-        users.add(user);
+        users.add(new User(0,"admin","admin"));
+        users.add(new User(0,"exam@mail.com","123"));
     }
 
     public int getSize() {

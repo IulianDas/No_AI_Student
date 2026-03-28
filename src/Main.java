@@ -6,12 +6,8 @@ import learnEnglish.repository.*;
 import learnEnglish.repository.impl.*;
 import learnEnglish.resources.Resource;
 import learnEnglish.resources.impl.ResourceImpl;
-import learnEnglish.service.AdminMenu;
-import learnEnglish.service.CourseMenu;
-import learnEnglish.service.UserService;
-import learnEnglish.service.impl.AdminMenuImpl;
-import learnEnglish.service.impl.CourseMenuImpl;
-import learnEnglish.service.impl.UserServiceImpl;
+import learnEnglish.service.*;
+import learnEnglish.service.impl.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -23,10 +19,15 @@ public class Main {
     private static final LessonRepository lessonRepository = new LessonRepositoryImpl();
     private static final QuestionRepository questionRepository = new QuestionRepositoryImpl();
     private static final QuizRepository quizRepository = new QuizRepositoryImpl();
-    private  static final UserProgressRepository userProgressRepository = new UserProgressRepositoryImpl();
-    private static final CourseMenu courseMenu = new CourseMenuImpl(courseRepository, lessonRepository, questionRepository, quizRepository, userProgressRepository);
+    private static final UserProgressRepository userProgressRepository = new UserProgressRepositoryImpl();
+
+    private static final UserProgressService userProgressService = new UserProgressServiceImpl(userProgressRepository);
+    private static final QuizService quizService = new QuizServiceImpl(questionRepository, quizRepository);
     private static final AdminMenu adminMenu = new AdminMenuImpl();
     private static final Resource resource = new ResourceImpl();
+    private static final CourseService courseService = new CourseServiceImpl(lessonRepository,userProgressRepository,quizService,userProgressService);
+    private static final CourseMenu courseMenu = new CourseMenuImpl(courseRepository, userProgressRepository,courseService);
+
     private static final UserService userService = new UserServiceImpl(userRepository, courseMenu, adminMenu,resource);
 
     public static void main(String[] args) {
@@ -94,7 +95,7 @@ public class Main {
         List<Quiz> quizzes = quizRepository.getAllQuiz();
         List<Question> questions = questionRepository.getAllQuestion();
 
-        List<Course> fullCourses = courses.stream()
+        courses.stream()
                 .peek(course -> course.setLessons(lessons.stream()
                         .peek(lesson -> lesson.setQuiz(quizzes.stream()
                                 .peek(quiz -> quiz.setQuestions(questions.stream()
@@ -105,9 +106,6 @@ public class Main {
                         .filter(lesson -> lesson.getCourseId() == course.getId())
                         .toList()))
                 .toList();
-
-
-        courseRepository.initDB(fullCourses);
     }
 
 }

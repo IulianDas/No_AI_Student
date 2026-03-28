@@ -13,7 +13,7 @@ public class UserProgressRepositoryImpl  implements UserProgressRepository {
 
     @Override
     public List<UserProgress> getCourseProgressByUserId(int userId) {
-        return userProgressRepository.stream().filter(userProgress -> userProgress.getUser().getId() == userId).toList();
+        return userProgressRepository.stream().filter(userProgress -> userProgress.getUserId() == userId).toList();
     }
 
     @Override
@@ -30,5 +30,18 @@ public class UserProgressRepositoryImpl  implements UserProgressRepository {
             }
         }
 
+    }
+
+    @Override
+    public int getLastId() {
+        return userProgressRepository.isEmpty() ? -1 : userProgressRepository.getLast().getId();
+    }
+
+    @Override
+    public UserProgress getCourseProgressByUserIdAndCourseId(int id, int courseId) {
+        return userProgressRepository.stream()
+                .filter(userProgress -> userProgress.getUserId() == id && userProgress.getCourseId() == courseId)
+                .findAny()
+                .orElseGet(UserProgress::new);
     }
 }

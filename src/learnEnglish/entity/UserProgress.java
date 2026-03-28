@@ -1,21 +1,27 @@
 package learnEnglish.entity;
 
 public class UserProgress {
-    private User user;
     private int id;
+    private int userId;
     private int courseId;
     private int progressLessonCounter;
-    private float percentProgress;
 
     public UserProgress() {
     }
 
-    public User getUser() {
-        return user;
+    public UserProgress(int id, int userId,  int courseId, int progressLessonCounter) {
+        this.id = id;
+        this.userId = userId;
+        this.courseId = courseId;
+        this.progressLessonCounter = progressLessonCounter;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUser(int userId) {
+        this.userId = userId;
     }
 
     public int getId() {
@@ -42,22 +48,13 @@ public class UserProgress {
         this.progressLessonCounter = progressLessonCounter;
     }
 
-    public float getPercentProgress() {
-        return percentProgress;
-    }
-
-    public void setPercentProgress(float percentProgress) {
-        this.percentProgress = percentProgress;
-    }
-
     @Override
     public String toString() {
         return "UserProgress{" +
-                "user=" + user +
+                "user=" + userId +
                 ", id=" + id +
                 ", courseId=" + courseId +
                 ", progressLessonCounter=" + progressLessonCounter +
-                ", percentProgress=" + percentProgress +
                 '}';
     }
 }

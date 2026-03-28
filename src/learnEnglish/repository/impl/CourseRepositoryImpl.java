@@ -1,26 +1,23 @@
 package learnEnglish.repository.impl;
 
 import learnEnglish.entity.Course;
+import learnEnglish.repository.CourseRepository;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CourseRepositoryImpl implements learnEnglish.repository.CourseRepository {
+public class CourseRepositoryImpl implements CourseRepository {
 
-    private List<Course> courses;
-    private static Course course = new Course(1,"Who are you lesson");
-    private static List<Course> coursesToInit = Arrays.asList(course);
+    private static final List<Course> courses = new ArrayList<>();
 
     public CourseRepositoryImpl() {
-    }
-
-    public void initDB(List<Course> courses){
-        this.courses = courses;
+        courses.add(new Course(1,"Who are someone in English"));
+        courses.add(new Course(2,"How to use a, an and is in English"));
     }
 
     @Override
     public Course getCourse(int courseId) {
-        return courses.stream().findFirst().filter(course1 -> course1.getId() == courseId).orElseGet(Course::new);
+        return courses.stream().filter(course -> course.getId() == courseId).findAny().orElseGet(Course::new);
     }
 
     @Override
@@ -55,7 +52,12 @@ public class CourseRepositoryImpl implements learnEnglish.repository.CourseRepos
 
     @Override
     public List<Course> getAllInit() {
-        return coursesToInit;
+        return courses;
+    }
+
+    @Override
+    public List<Course> getAllCoursesByListId(List<Integer> ids) {
+        return courses.stream().filter(course -> ids.contains(course.getId())).toList();
     }
 
     @Override

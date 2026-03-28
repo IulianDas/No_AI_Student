@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface QuestionRepository {
 
-    Question getQuestion();
     void  setQuestion();
     List<Question> getAllQuestion();
 

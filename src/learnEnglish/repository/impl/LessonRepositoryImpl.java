@@ -8,19 +8,17 @@ import java.util.List;
 
 public class LessonRepositoryImpl implements LessonRepository {
 
-    private static final Lesson courseA1Lesson1 = new Lesson(1, 1,"WhoAreYou","In english we have different names you, me, dog and cat.","You are 100% Human, no way to be someone else ", 1);
-    private static final Lesson courseA1Lesson2 = new Lesson(2, 2,"WhoAreMe","In english we have different names you, me, dog and cat.","I am 100% Machine, no way to be someone else ", 1);
-
     private static final List<Lesson> lessons = new ArrayList<>();
+
+    public LessonRepositoryImpl() {
+        lessons.add(new Lesson(1, 1,"WhoAreYou","In english we have different names you, me, dog and cat.","You are 100% Human, no way to be someone else ", 1));
+        lessons.add(new Lesson(2, 2,"WhoAreMe","In english we have different names you, me, dog and cat.","I am 100% Machine, no way to be someone else ", 1));
+        lessons.add(new Lesson(3, 1,"Present simple Time in English","In english we have different times. PrS mean that something is happening right now","Present Simple example: I run,eat,talk,etc", 2));
+    }
 
     @Override
     public List<Lesson> getLessons() {
-        lessons.add(courseA1Lesson1);
-        lessons.add(courseA1Lesson2);
         return lessons;
-    }
-    public Lesson getLesson() {
-        return courseA1Lesson1;
     }
 
     @Override

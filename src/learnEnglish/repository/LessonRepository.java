@@ -8,6 +8,5 @@ public interface LessonRepository {
 
     List<Lesson> getLessons();
     void setLesson();
-    Lesson getLesson();
     List<Lesson> getLessonsByCourseId(int courseId);
 }

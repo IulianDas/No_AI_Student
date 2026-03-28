@@ -14,5 +14,6 @@ public interface CourseRepository {
     void removeCourse();
     void setCourse();
     List<Course> getAllInit();
-    void initDB(List<Course> courses);
+
+    List<Course> getAllCoursesByListId(List<Integer> ids);
 }

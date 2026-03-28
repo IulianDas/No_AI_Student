@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         int position;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Introduce your Login Email:");
+        System.out.println("Introduce your Login Email: exam@mail.com");
         String email= scanner.nextLine();
         position = userRepository.checkUser((UserRepositoryImpl) userRepository,email);
 
@@ -67,10 +67,10 @@ public class UserServiceImpl implements UserService {
     public void registration() {
         User user = new User();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Introduce your Email: example@mail.com");
+        System.out.println("Introduce your Email: exam@mail.com");
         String email= scanner.nextLine();
         if (checkEmail(email)){
-            System.out.println("Introduce your Password: example@mail.com");
+            System.out.println("Introduce your Password: 8 digits and so on . . .");
             String tempPassword= scanner.nextLine();
             if (checkPassword(tempPassword)){
                 user.setId(40);
