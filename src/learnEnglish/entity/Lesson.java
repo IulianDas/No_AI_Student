@@ -3,18 +3,23 @@ package learnEnglish.entity;
 public class Lesson {
 
     private int id;
+    private int lessonOrder;
     private String topic;
     private String description;
     private String paragraph;
     private Quiz quiz;
     private int courseId;
 
-    public Lesson(int id, String topic, String description, String paragraph, int courseId) {
+    public Lesson(int id, int lessonOrder, String topic, String description, String paragraph, int courseId) {
         this.id = id;
+        this.lessonOrder = lessonOrder;
         this.topic = topic;
         this.description = description;
         this.paragraph = paragraph;
         this.courseId = courseId;
+    }
+
+    public Lesson() {
     }
 
     public int getId() {
@@ -23,6 +28,14 @@ public class Lesson {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getLessonOrder() {
+        return lessonOrder;
+    }
+
+    public void setLessonOrder(int lessonOrder) {
+        this.lessonOrder = lessonOrder;
     }
 
     public String getTopic() {

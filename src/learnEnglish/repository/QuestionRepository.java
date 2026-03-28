@@ -10,4 +10,5 @@ public interface QuestionRepository {
     void  setQuestion();
     List<Question> getAllQuestion();
 
+    List<Question> getAllQuestionByQuizzId(int id);
 }

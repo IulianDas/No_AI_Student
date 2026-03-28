@@ -8,4 +8,6 @@ public interface QuizRepository {
     Quiz getQuiz();
     void setQuiz();
     List<Quiz> getAllQuiz();
+
+    Quiz getQuizByLessonId(int lessonId);
 }

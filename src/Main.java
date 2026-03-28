@@ -1,5 +1,9 @@
-import learnEnglish.repository.UserRepository;
-import learnEnglish.repository.impl.UserRepositoryImpl;
+import learnEnglish.entity.Course;
+import learnEnglish.entity.Lesson;
+import learnEnglish.entity.Question;
+import learnEnglish.entity.Quiz;
+import learnEnglish.repository.*;
+import learnEnglish.repository.impl.*;
 import learnEnglish.resources.Resource;
 import learnEnglish.resources.impl.ResourceImpl;
 import learnEnglish.service.AdminMenu;
@@ -9,12 +13,18 @@ import learnEnglish.service.impl.AdminMenuImpl;
 import learnEnglish.service.impl.CourseMenuImpl;
 import learnEnglish.service.impl.UserServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     private static final UserRepository userRepository = new UserRepositoryImpl();
-    private static final CourseMenu courseMenu = new CourseMenuImpl();
+    private static final CourseRepository courseRepository = new CourseRepositoryImpl();
+    private static final LessonRepository lessonRepository = new LessonRepositoryImpl();
+    private static final QuestionRepository questionRepository = new QuestionRepositoryImpl();
+    private static final QuizRepository quizRepository = new QuizRepositoryImpl();
+    private  static final UserProgressRepository userProgressRepository = new UserProgressRepositoryImpl();
+    private static final CourseMenu courseMenu = new CourseMenuImpl(courseRepository, lessonRepository, questionRepository, quizRepository, userProgressRepository);
     private static final AdminMenu adminMenu = new AdminMenuImpl();
     private static final Resource resource = new ResourceImpl();
     private static final UserService userService = new UserServiceImpl(userRepository, courseMenu, adminMenu,resource);
@@ -22,6 +32,8 @@ public class Main {
     public static void main(String[] args) {
 
         //ToDO Eto esheo siroi proekt
+
+        initDB();
 
         boolean tokenMenu = true;
 
@@ -46,9 +58,6 @@ public class Main {
                     tokenMenu = false;
                     break;
             }
-
-
-
         /*SyntaxMenu syntaxMenu = new SyntaxMenu();
         OOP oopMenu = new OOP();
         boolean tokenMenu = true;
@@ -76,8 +85,29 @@ public class Main {
                     break;
             }
         }*/
-
     }
+    }
+
+    public static void initDB(){
+        List<Course> courses = courseRepository.getAllInit();
+        List<Lesson> lessons = lessonRepository.getLessons();
+        List<Quiz> quizzes = quizRepository.getAllQuiz();
+        List<Question> questions = questionRepository.getAllQuestion();
+
+        List<Course> fullCourses = courses.stream()
+                .peek(course -> course.setLessons(lessons.stream()
+                        .peek(lesson -> lesson.setQuiz(quizzes.stream()
+                                .peek(quiz -> quiz.setQuestions(questions.stream()
+                                        .filter(question -> question.getQuizId() == quiz.getId())
+                                        .toList()))
+                                .filter(quiz -> quiz.getLessonId() == lesson.getId() )
+                                .findFirst().orElseGet(Quiz::new)))
+                        .filter(lesson -> lesson.getCourseId() == course.getId())
+                        .toList()))
+                .toList();
+
+
+        courseRepository.initDB(fullCourses);
     }
 
 }

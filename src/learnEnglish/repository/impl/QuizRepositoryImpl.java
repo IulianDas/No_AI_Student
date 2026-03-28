@@ -1,20 +1,19 @@
 package learnEnglish.repository.impl;
 
-import learnEnglish.entity.Question;
 import learnEnglish.entity.Quiz;
 import learnEnglish.repository.QuizRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizRepositoryImpl implements QuizRepository {
 
-    private Question question;
-    private static List<Quiz> quizRepository = new ArrayList<>();
+    private static final Quiz quizA1Lesson1 = new Quiz(1, 1);
+    private static final List<Quiz> quizzes = List.of(quizA1Lesson1);
+
 
     @Override
     public Quiz getQuiz() {
-        return null;
+        return quizA1Lesson1;
     }
 
     @Override
@@ -24,6 +23,11 @@ public class QuizRepositoryImpl implements QuizRepository {
 
     @Override
     public List<Quiz> getAllQuiz() {
-        return List.of();
+        return quizzes;
+    }
+
+    @Override
+    public Quiz getQuizByLessonId(int lessonId) {
+        return quizzes.stream().findFirst().filter(quiz -> quiz.getLessonId() == lessonId).orElseGet(Quiz::new);
     }
 }

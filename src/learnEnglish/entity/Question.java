@@ -6,17 +6,15 @@ public class Question {
 
     private  int id;
     private String question;
-    private String answer;
+    private int answer;
     private String[] variant;
-    private boolean checkIfPass;
     private int quizId;
 
-    public Question(int id, String question, String answer, String[] variant, boolean checkIfPass, int quizId) {
+    public Question(int id, String question, int answer, String[] variant, int quizId) {
         this.id = id;
         this.question = question;
         this.answer = answer;
         this.variant = variant;
-        this.checkIfPass = checkIfPass;
         this.quizId = quizId;
     }
 
@@ -44,11 +42,11 @@ public class Question {
         this.question = question;
     }
 
-    public String getAnswer() {
+    public int getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(int answer) {
         this.answer = answer;
     }
 
@@ -60,14 +58,6 @@ public class Question {
         this.variant = variant;
     }
 
-    public boolean isCheckIfPass() {
-        return checkIfPass;
-    }
-
-    public void setCheckIfPass(boolean checkIfPass) {
-        this.checkIfPass = checkIfPass;
-    }
-
     @Override
     public String toString() {
         return "Question{" +
@@ -75,7 +65,6 @@ public class Question {
                 ", question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 ", variant=" + Arrays.toString(variant) +
-                ", checkIfPass=" + checkIfPass +
                 '}';
     }
 }

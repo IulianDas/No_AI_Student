@@ -9,7 +9,7 @@ public class UserRepositoryImpl implements learnEnglish.repository.UserRepositor
 
     private static final User admin = new User(0,"admin","admin");
     private static final User user = new User(0,"exam@mail.com","123");
-    private static List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     public UserRepositoryImpl() {
         users.add(admin);
