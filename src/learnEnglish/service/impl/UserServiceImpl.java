@@ -1,5 +1,6 @@
 package learnEnglish.service.impl;
 
+import learnEnglish.entity.Role;
 import learnEnglish.entity.User;
 import learnEnglish.repository.UserRepository;
 import learnEnglish.repository.impl.UserRepositoryImpl;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                if (tempPassword.equals(email) && email.equals("admin")){
+                if (user.getRole().equals(Role.ADMIN)){
                     System.out.println("Welcome Administrator!\n\n");
                     adminMenu.getAdminMenu(user);
                 } else {
@@ -76,6 +77,16 @@ public class UserServiceImpl implements UserService {
                 user.setId(40);
                 user.setEmail(email);
                 user.setPassword(tempPassword);
+                System.out.println("\n Select role: 1) User\t 2) Admin");
+                int roleChoise = scanner.nextInt();
+                if (roleChoise == 1){
+                    user.setRole(Role.USER);
+                } else if (roleChoise == 2) {
+                    user.setRole(Role.ADMIN);
+                }else{
+                    System.out.println("\n Wrong number! Default you are Loser!");
+                    user.setRole(Role.USER);
+                }
                 userRepository.setUsers(user);
                 System.out.println("Registered successful!");
             }else{

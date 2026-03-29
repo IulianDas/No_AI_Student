@@ -1,5 +1,6 @@
 package learnEnglish.repository.impl;
 
+import learnEnglish.entity.Role;
 import learnEnglish.entity.User;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ public class UserRepositoryImpl implements learnEnglish.repository.UserRepositor
     private final List<User> users = new ArrayList<>();
 
     public UserRepositoryImpl() {
-        users.add(new User(0,"admin","admin"));
-        users.add(new User(0,"exam@mail.com","123"));
+        users.add(new User(0,"admin","admin", Role.ADMIN));
+        users.add(new User(0,"exam@mail.com","123", Role.USER));
     }
 
     public int getSize() {
