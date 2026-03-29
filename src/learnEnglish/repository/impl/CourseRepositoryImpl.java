@@ -12,7 +12,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
     public CourseRepositoryImpl() {
         courses.add(new Course(1,"Who are someone in English"));
-        courses.add(new Course(2,"How to use a, an and is in English"));
+        courses.add(new Course(2,"How to use times in English"));
     }
 
     @Override

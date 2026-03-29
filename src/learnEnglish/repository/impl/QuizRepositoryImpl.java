@@ -14,6 +14,7 @@ public class QuizRepositoryImpl implements QuizRepository {
         quizzes.add(new Quiz(1,1));
         quizzes.add(new Quiz(2,2));
         quizzes.add(new Quiz(3,3));
+        quizzes.add(new Quiz(4,4));
     }
 
     @Override

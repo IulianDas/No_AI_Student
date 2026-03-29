@@ -22,10 +22,10 @@ public class Main {
     private static final UserProgressRepository userProgressRepository = new UserProgressRepositoryImpl();
 
     private static final UserProgressService userProgressService = new UserProgressServiceImpl(userProgressRepository);
-    private static final QuizService quizService = new QuizServiceImpl(questionRepository, quizRepository);
+    private static final QuizService quizService = new QuizServiceImpl(questionRepository, quizRepository,userProgressService);
     private static final AdminMenu adminMenu = new AdminMenuImpl();
     private static final Resource resource = new ResourceImpl();
-    private static final CourseService courseService = new CourseServiceImpl(lessonRepository,userProgressRepository,quizService,userProgressService);
+    private static final CourseService courseService = new CourseServiceImpl(lessonRepository,userProgressRepository,quizService,userProgressService,courseRepository);
     private static final CourseMenu courseMenu = new CourseMenuImpl(courseRepository, userProgressRepository,courseService);
 
     private static final UserService userService = new UserServiceImpl(userRepository, courseMenu, adminMenu,resource);

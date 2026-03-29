@@ -19,7 +19,6 @@ public class UserProgressServiceImpl implements UserProgressService {
     public void updateUserProgress (User user, Lesson chosenLesson) {
 
         int index = userProgressRepository.getLastId() + 1;
-
         if (chosenLesson.getLessonOrder() == 1) {
             UserProgress userProgress = new UserProgress(index, user.getId(), chosenLesson.getCourseId(),1);
             userProgressRepository.saveUserProgress(userProgress);

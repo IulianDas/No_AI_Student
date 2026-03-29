@@ -2,7 +2,6 @@ package learnEnglish.service.impl;
 
 import learnEnglish.entity.Course;
 import learnEnglish.entity.User;
-import learnEnglish.entity.UserProgress;
 import learnEnglish.repository.CourseRepository;
 import learnEnglish.repository.UserProgressRepository;
 import learnEnglish.service.CourseMenu;
@@ -42,27 +41,26 @@ public class CourseMenuImpl implements CourseMenu {
             int menuChoise = menu.nextInt();
             switch (menuChoise) {
                 case 1:
-                    System.out.println(courseRepository.getAllCourses());
+                    courseService.getAllCourses(courseRepository);
                     break;
                 case 2:
-                    List<Integer> ids = userProgressRepository.getCourseProgressByUserId(user.getId())
-                            .stream()
-                            .map(UserProgress::getCourseId)
-                            .toList();
-                    List<Course> courses = courseRepository.getAllCoursesByListId(ids);
+                    List<Integer> ids = courseService.getCourseListByUsersId(user);
+                    List<Course> courses = courseService.getCoursesByListId(ids);
                     if (courses.isEmpty()){
                         System.out.println("\n You don't start any courses!\n");
-                        break;}
-                    System.out.println(courses);
-                    courseService.startLesson(user);
-                    break;
+                        break;
+                    }else {
+                        System.out.println("\n You can continue follow course(s):\n");
+                        courseService.getStartedCourses(courses);
+                        courseService.startLesson(user);
+                        break;
+                    }
                 case 3:
-                    System.out.println(courseRepository.getAllCourses());
+                    courseService.getAllCourses(courseRepository);
                     courseService.startLesson(user);
                     break;
                 case 4:
-                    System.out.println("\n Progress of user is:\n\t");
-                    userProgressRepository.getCourseProgressByUserId(user.getId()).forEach(System.out::println);
+                    courseService.getUserProgress(user);
                     break;
                 case 0:
                     tokenMenu = false;
@@ -71,6 +69,7 @@ public class CourseMenuImpl implements CourseMenu {
 
     }
 }
+
 
 
 }

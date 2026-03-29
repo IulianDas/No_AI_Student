@@ -13,7 +13,10 @@ public class UserProgressRepositoryImpl  implements UserProgressRepository {
 
     @Override
     public List<UserProgress> getCourseProgressByUserId(int userId) {
-        return userProgressRepository.stream().filter(userProgress -> userProgress.getUserId() == userId).toList();
+        return userProgressRepository
+                .stream()
+                .filter(userProgress -> userProgress.getUserId() == userId)
+                .toList();
     }
 
     @Override
@@ -27,9 +30,9 @@ public class UserProgressRepositoryImpl  implements UserProgressRepository {
             if (userProgress.getId() == updateProgress.getId()){
                 int indexPosition = userProgressRepository.indexOf(userProgress);
                 userProgressRepository.set(indexPosition,updateProgress);
+                break;
             }
         }
-
     }
 
     @Override
