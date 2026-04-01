@@ -5,6 +5,7 @@ import learnEnglish.repository.LessonRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LessonRepositoryImpl implements LessonRepository {
 
@@ -19,6 +20,7 @@ public class LessonRepositoryImpl implements LessonRepository {
 
     @Override
     public List<Lesson> getLessons() {
+
         return lessons;
     }
 
@@ -28,7 +30,40 @@ public class LessonRepositoryImpl implements LessonRepository {
     }
 
     @Override
-    public void setLesson() {
+    public int createLesson(int courseId) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n Introduce Name of the lesson: \n");
+        String topic = scanner.nextLine();
+        System.out.println("\n Introduce description of the lesson: \n");
+        String description = scanner.nextLine();
+        System.out.println("\n Introduce rules or additional information: \n");
+        String paragraph = scanner.nextLine();
+        int lessonNewId = lessons.getLast().getId()+1;
+        lessons.add( new Lesson(lessonNewId, 1, topic, description, paragraph, courseId));
+        return lessonNewId;
+    }
+
+    @Override
+    public void updateLesson(int courseId, int lessonId) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n Introduce Name of the lesson: \n");
+        String topic = scanner.nextLine();
+        System.out.println("\n Introduce description of the lesson: \n");
+        String description = scanner.nextLine();
+        System.out.println("\n Introduce rules or additional information: \n");
+        String paragraph = scanner.nextLine();
+        int indexOfLesson = lessons.indexOf(lessons.get(courseId));
+        int orderId = lessons.get(indexOfLesson).getLessonOrder();
+        Lesson newLesson = new Lesson(lessonId, orderId, topic, description, paragraph, courseId);
+        lessons.set(indexOfLesson, newLesson);
+        System.out.println("\n Lesson is updated!");
+    }
+
+    @Override
+    public void removeLessonById(int courseId) {
+        lessons.removeIf(lesson -> lesson.getCourseId() == courseId);
+        System.out.println("\n Lesson is deleted!");
 
     }
 }

@@ -1,10 +1,13 @@
 package learnEnglish.service.impl;
 
-import learnEnglish.entity.*;
-import learnEnglish.repository.*;
+import learnEnglish.entity.Course;
+import learnEnglish.entity.Lesson;
+import learnEnglish.entity.UserProgress;
+import learnEnglish.repository.CourseRepository;
+import learnEnglish.repository.LessonRepository;
+import learnEnglish.repository.UserProgressRepository;
 import learnEnglish.service.CourseService;
 import learnEnglish.service.QuizService;
-import learnEnglish.service.UserProgressService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,21 +15,18 @@ import java.util.Scanner;
 public class CourseServiceImpl implements CourseService {
 
     private final LessonRepository lessonRepository;
-
     private final UserProgressRepository userProgressRepository;
     private final QuizService quizService;
-    private final UserProgressService userProgressService;
     private final CourseRepository courseRepository;
 
-    public CourseServiceImpl(LessonRepository lessonRepository, UserProgressRepository userProgressRepository, QuizService quizService, UserProgressService userProgressService, CourseRepository courseRepository) {
+    public CourseServiceImpl(LessonRepository lessonRepository, UserProgressRepository userProgressRepository, QuizService quizService, CourseRepository courseRepository) {
         this.lessonRepository = lessonRepository;
         this.userProgressRepository = userProgressRepository;
         this.quizService = quizService;
-        this.userProgressService = userProgressService;
         this.courseRepository = courseRepository;
     }
 
-    public void startLesson(User user) {
+    public void startLesson(int userId) {
 
         Scanner scanner = new Scanner(System.in);
         int lessonId;
@@ -39,7 +39,7 @@ public class CourseServiceImpl implements CourseService {
 
             System.out.println("------- English new Courses ---------\n");
             lessons = lessonRepository.getLessonsByCourseId(courseId);
-            UserProgress userProgress = userProgressRepository.getCourseProgressByUserIdAndCourseId(user.getId(), courseId);
+            UserProgress userProgress = userProgressRepository.getCourseProgressByUserIdAndCourseId(userId, courseId);
             boolean startNewCourse = true;
 
             while (startNewCourse) {
@@ -61,7 +61,7 @@ public class CourseServiceImpl implements CourseService {
                             + "\n\n\n");
                     System.out.println(" Input 1 to start quiz or 0 to exit.\n\n\n\n");
                     if(scanner.nextInt() != 0){
-                    quizService.startQuiz(chosenLessonQuiz, user);
+                    quizService.startQuiz(chosenLessonQuiz, userId);
 
                     System.out.println(" Do you want to continue with next lesson?\n" +
                             "\t 1) Chose next lesson.\n" +
@@ -81,7 +81,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void getAllCourses(CourseRepository courseRepository) {
+    public void getAllCourses() {
         courseRepository.getAllCourses()
                 .stream()
                 .map(course -> " Course: [" + course.getId() +"]\n" +
@@ -90,12 +90,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void getUserProgress(User user) {
+    public void getUserProgress(int userId) {
         if (userProgressRepository.getLastId() == -1){
             System.out.println("\n You don't have any progress!:\n\t");
         }else {
             System.out.println("\n Progress of user is:\n\t");
-            userProgressRepository.getCourseProgressByUserId(user.getId())
+            userProgressRepository.getCourseProgressByUserId(userId)
                 .stream()
                 .map(userProgress ->" Course:\n\t ["
                                                 + courseRepository.getCourse(userProgress.getCourseId()).getId()+"] "
@@ -108,8 +108,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Integer> getCourseListByUsersId(User user) {
-        return userProgressRepository.getCourseProgressByUserId(user.getId())
+    public List<Integer> getCourseListByUsersId(int userId) {
+        return userProgressRepository.getCourseProgressByUserId(userId)
                 .stream()
                 .map(UserProgress::getCourseId)
                 .toList();

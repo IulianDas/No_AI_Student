@@ -82,6 +82,7 @@ public class Lesson {
     public String toString() {
         return "Lesson{" +
                 "id=" + id +
+                "less order=" + lessonOrder +
                 ", topic='" + topic + '\'' +
                 ", description='" + description + '\'' +
                 ", paragraph='" + paragraph + '\'' +

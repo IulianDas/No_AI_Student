@@ -15,10 +15,6 @@ public class UserRepositoryImpl implements learnEnglish.repository.UserRepositor
         users.add(new User(0,"exam@mail.com","123", Role.USER));
     }
 
-    public int getSize() {
-        return users.size();
-    }
-
     @Override
     public List<User> getUsers() {
         return users;
@@ -34,20 +30,14 @@ public class UserRepositoryImpl implements learnEnglish.repository.UserRepositor
     }
 
     @Override
-    public int checkUser(UserRepositoryImpl repository, String email) {
-        int position = 0;
-        for (int i = 0; i <= repository.getSize()-1; i++) {
-            if (repository.getUser(i).getEmail().equals(email)) {
-                position = i;
+    public int checkUser(String email) {
+        for (int i = 0; i <= users.size()-1; i++) {
+            if (users.get(i).getEmail().equals(email)) {
+                return i;
             }
+        }return -1;
         }
-        if(position >=0){
-            return position;
-        }
-        else {
-            return -1;
-        }
-    }
+
 }
 
 

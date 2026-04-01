@@ -1,16 +1,14 @@
 package learnEnglish.service;
 
 import learnEnglish.entity.Course;
-import learnEnglish.entity.User;
-import learnEnglish.repository.CourseRepository;
 
 import java.util.List;
 
 public interface CourseService {
-    void startLesson(User user);
-    void getAllCourses(CourseRepository courseRepository);
-    void getUserProgress(User user);
-    List<Integer> getCourseListByUsersId(User user);
+    void startLesson(int userId);
+    void getAllCourses();
+    void getUserProgress(int userId);
+    List<Integer> getCourseListByUsersId(int userId);
 
     List<Course> getCoursesByListId(List<Integer> ids);
 

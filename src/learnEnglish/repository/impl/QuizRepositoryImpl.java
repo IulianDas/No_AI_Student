@@ -18,18 +18,21 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
-    public Quiz getQuiz() {
-        return new Quiz();
-    }
-
-    @Override
-    public void setQuiz() {
-
+    public int createQuiz(int lessonId) {
+        int newQuizId = quizzes.getLast().getId()+1;
+        quizzes.add(new Quiz( newQuizId, lessonId));
+        return newQuizId;
     }
 
     @Override
     public List<Quiz> getAllQuiz() {
         return quizzes;
+    }
+
+    @Override
+    public void removeQuiz(int lessonId) {
+        quizzes.removeIf(quiz -> quiz.getLessonId() == lessonId);
+        System.out.println("\n Quiz is Deleted!");
     }
 
     @Override

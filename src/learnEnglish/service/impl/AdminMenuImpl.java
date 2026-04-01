@@ -1,21 +1,30 @@
 package learnEnglish.service.impl;
 
-import learnEnglish.entity.User;
 import learnEnglish.service.AdminMenu;
+import learnEnglish.service.AdminService;
 
 import java.util.Scanner;
 
 public class AdminMenuImpl implements AdminMenu {
+
+
+    private final AdminService adminService;
+
+    public AdminMenuImpl(AdminService adminService) {
+
+        this.adminService = adminService;
+    }
+
     @Override
-    public void getAdminMenu(User user) {
+    public void getAdminMenu(int userId) {
         boolean tokenMenu = true;
         while (tokenMenu){
-            System.out.print("\n--------- English Lesson -----------\n"
+            System.out.print("\n---------- Admin Menu ------------\n"
                     +"\t\n"
-                    +"\t\t1) Create Course\n"
-                    +"\t\t2) Create Lesson\n"
-                    +"\t\t3) Create Quiz\n"
-                    +"\t\t4) Options\n"
+                    +"\t\t1) Show all Course\n"
+                    +"\t\t2) Update Course\n"
+                    +"\t\t3) Create Course\n"
+                    +"\t\t4) Delete Course\n"
                     +"\t\t0) Logout\n"
                     +"\n------------------------------------\n");
 
@@ -23,15 +32,18 @@ public class AdminMenuImpl implements AdminMenu {
             int menuChoise = menu.nextInt();
             switch (menuChoise) {
                 case 1:
+                    adminService.getAllCourses();
                     break;
                 case 2:
-
+                    adminService.updateSelectedCourse();
                     break;
                 case 3:
-
+                    adminService.createCourse();
                     break;
                 case 4:
-
+                    adminService.getAllCourses();
+                    System.out.println(" Chose course to delete: \n");
+                    adminService.deleteCourseById(menu.nextInt());
                     break;
                 case 0:
                     tokenMenu = false;

@@ -21,18 +21,19 @@ public class Main {
     private static final QuizRepository quizRepository = new QuizRepositoryImpl();
     private static final UserProgressRepository userProgressRepository = new UserProgressRepositoryImpl();
 
+
     private static final UserProgressService userProgressService = new UserProgressServiceImpl(userProgressRepository);
     private static final QuizService quizService = new QuizServiceImpl(questionRepository, quizRepository,userProgressService);
-    private static final AdminMenu adminMenu = new AdminMenuImpl();
     private static final Resource resource = new ResourceImpl();
-    private static final CourseService courseService = new CourseServiceImpl(lessonRepository,userProgressRepository,quizService,userProgressService,courseRepository);
-    private static final CourseMenu courseMenu = new CourseMenuImpl(courseRepository, userProgressRepository,courseService);
+    private static final CourseService courseService = new CourseServiceImpl(lessonRepository,userProgressRepository,quizService,courseRepository);
+    private static final AdminService adminService = new AdminServiceImpl (courseRepository,lessonRepository,quizRepository,questionRepository);
+    private static final CourseMenu courseMenu = new CourseMenuImpl(courseService);
+    private static final AdminMenu adminMenu = new AdminMenuImpl(adminService);
 
     private static final UserService userService = new UserServiceImpl(userRepository, courseMenu, adminMenu,resource);
 
-    public static void main(String[] args) {
 
-        //ToDO Eto esheo siroi proekt
+    public static void main(String[] args) {
 
         initDB();
 
@@ -47,8 +48,8 @@ public class Main {
                 +"\n------------------------------------\n");
 
             Scanner menu = new Scanner(System.in);
-            int menuChoise = menu.nextInt();
-            switch (menuChoise) {
+            int menuChose = menu.nextInt();
+            switch (menuChose) {
                 case 1:
                     userService.authentication();
                     break;
@@ -72,9 +73,9 @@ public class Main {
                     "\n------------------------------------\n");
 
             Scanner menu = new Scanner(System.in);
-            int menuChoise = menu.nextInt();
+            int menuChose = menu.nextInt();
 
-            switch (menuChoise) {
+            switch (menuChose) {
                 case 1:
                     syntaxMenu.syntaxMenu();
                     break;

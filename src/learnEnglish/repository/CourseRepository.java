@@ -6,14 +6,10 @@ import java.util.List;
 
 public interface CourseRepository {
     Course getCourse(int courseId);
-    String getCourseName(Course course);
     List<Course> getAllCourses();
-    List<Course> getOnlyStartedCourses();
-    List<Course> getOnlyNewCourses();
-    void setCourse(Course course);
-    void removeCourse();
-    void setCourse();
+    int createNewCourse();
+    void removeCourse(int courseId);
     List<Course> getAllInit();
-
+    void updateCourseName(int courseId, String updatedCourseName);
     List<Course> getAllCoursesByListId(List<Integer> ids);
 }

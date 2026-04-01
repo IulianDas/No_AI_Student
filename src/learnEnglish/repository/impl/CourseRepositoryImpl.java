@@ -5,6 +5,7 @@ import learnEnglish.repository.CourseRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CourseRepositoryImpl implements CourseRepository {
 
@@ -21,38 +22,33 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public String getCourseName(Course course) {
-        return course.getName();
-    }
-
-    @Override
     public List<Course> getAllCourses() {
         return courses;
     }
 
     @Override
-    public List<Course> getOnlyStartedCourses() {
-        return courses;
+    public int createNewCourse() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n Introduce name of the new course: ");
+        String courseName = scanner.nextLine();
+        int newId = courses.getLast().getId()+1;
+        courses.add(new Course(newId, courseName));
+        return newId;
     }
 
-    @Override
-    public List<Course> getOnlyNewCourses() {
-        return courses;
-    }
-
-    @Override
-    public void setCourse(Course course) {
-
-    }
-
-    @Override
-    public void setCourse() {
-
-    }
 
     @Override
     public List<Course> getAllInit() {
         return courses;
+    }
+
+    @Override
+    public void updateCourseName(int courseId, String updatedCourseName) {
+        int indexPosition = courses.indexOf(courses.stream().filter(course -> course.getId() == courseId).findFirst().get());
+        Course updatedCourse = courses.stream().filter(course -> course.getId() == courseId).findAny().get();
+        updatedCourse.setName(updatedCourseName);
+        courses.set(indexPosition, updatedCourse);
+        System.out.println("\n Name is changed!");
     }
 
     @Override
@@ -61,7 +57,8 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public void removeCourse() {
-
+    public void removeCourse(int courseId) {
+        courses.removeIf(course -> course.getId() == courseId);
+        System.out.println("\n Course ["+ courseId + "] is deleted!");
     }
 }

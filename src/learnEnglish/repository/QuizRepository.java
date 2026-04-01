@@ -5,9 +5,9 @@ import learnEnglish.entity.Quiz;
 import java.util.List;
 
 public interface QuizRepository {
-    Quiz getQuiz();
-    void setQuiz();
-    List<Quiz> getAllQuiz();
 
+    int createQuiz(int lessonId);
+    List<Quiz> getAllQuiz();
+    void removeQuiz(int lessonId);
     Quiz getQuizByLessonId(int lessonId);
 }

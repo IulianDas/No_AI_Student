@@ -3,7 +3,6 @@ package learnEnglish.service.impl;
 import learnEnglish.entity.Lesson;
 import learnEnglish.entity.Question;
 import learnEnglish.entity.Quiz;
-import learnEnglish.entity.User;
 import learnEnglish.repository.QuestionRepository;
 import learnEnglish.repository.QuizRepository;
 import learnEnglish.service.QuizService;
@@ -26,7 +25,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void startQuiz(Lesson chosenLessonQuiz, User user){
+    public void startQuiz(Lesson chosenLessonQuiz, int userId){
 
         Scanner scanner = new Scanner(System.in);
         int correctAnswerCounter = 0;
@@ -44,7 +43,7 @@ public class QuizServiceImpl implements QuizService {
                                    "------- Lesson " + chosenLessonQuiz.getLessonOrder() +
                                    " Quiz ---------\n\n");
                 Quiz lessonQuiz = quizRepository.getQuizByLessonId(chosenLessonQuiz.getId());
-                List<Question> lessonQuestions = questionRepository.getAllQuestionByQuizzId(lessonQuiz.getId());
+                List<Question> lessonQuestions = questionRepository.getAllQuestionByQuizId(lessonQuiz.getId());
                 for (Question question : lessonQuestions) {
                     System.out.println(" Question is:\t " + question.getQuestion());
                     System.out.println("\n Chose answer:\n\t " );
@@ -60,7 +59,7 @@ public class QuizServiceImpl implements QuizService {
                 }
                 if(100 * correctAnswerCounter/lessonQuestions.size() >= 80) {
                     System.out.println("\n You Pass Lesson " + chosenLessonQuiz.getTopic());
-                    userProgressService.updateUserProgress(user,chosenLessonQuiz);
+                    userProgressService.updateUserProgress(userId,chosenLessonQuiz);
                     isCourseNotPassed = false;
                 } else {
                 System.out.println("\n You Failed Lesson " + chosenLessonQuiz.getTopic() + "\n");

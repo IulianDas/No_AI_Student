@@ -7,6 +7,10 @@ import java.util.List;
 public interface LessonRepository {
 
     List<Lesson> getLessons();
-    void setLesson();
+    int createLesson(int courseId);
     List<Lesson> getLessonsByCourseId(int courseId);
+
+    void updateLesson(int courseId, int lessonId);
+
+    void removeLessonById(int courseId);
 }

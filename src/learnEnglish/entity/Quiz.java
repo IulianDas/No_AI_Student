@@ -16,12 +16,6 @@ public class Quiz {
         this.lessonId = lessonId;
     }
 
-    public Quiz(int id, List<Question> questions, int lessonId) {
-        this.id = id;
-        this.questions = questions;
-        this.lessonId = lessonId;
-    }
-
     public int getLessonId() {
         return lessonId;
     }

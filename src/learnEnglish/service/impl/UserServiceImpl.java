@@ -3,7 +3,6 @@ package learnEnglish.service.impl;
 import learnEnglish.entity.Role;
 import learnEnglish.entity.User;
 import learnEnglish.repository.UserRepository;
-import learnEnglish.repository.impl.UserRepositoryImpl;
 import learnEnglish.resources.Resource;
 import learnEnglish.service.AdminMenu;
 import learnEnglish.service.CourseMenu;
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduce your Login Email: exam@mail.com");
         String email= scanner.nextLine();
-        position = userRepository.checkUser((UserRepositoryImpl) userRepository,email);
+        position = userRepository.checkUser(email);
 
         if(position < 0){
             System.out.println("Wrong Email!");
@@ -52,10 +51,10 @@ public class UserServiceImpl implements UserService {
                 }
                 if (user.getRole().equals(Role.ADMIN)){
                     System.out.println("Welcome Administrator!\n\n");
-                    adminMenu.getAdminMenu(user);
+                    adminMenu.getAdminMenu(user.getId());
                 } else {
                     System.out.println("Your are in, Welcome!\n\n");
-                    courseMenu.getCourseMenu(user);
+                    courseMenu.getCourseMenu(user.getId());
                 }
             } else {
                 System.out.println("Wrong password!");

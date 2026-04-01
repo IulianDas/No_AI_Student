@@ -1,9 +1,6 @@
 package learnEnglish.service.impl;
 
 import learnEnglish.entity.Course;
-import learnEnglish.entity.User;
-import learnEnglish.repository.CourseRepository;
-import learnEnglish.repository.UserProgressRepository;
 import learnEnglish.service.CourseMenu;
 import learnEnglish.service.CourseService;
 
@@ -12,18 +9,15 @@ import java.util.Scanner;
 
 public class CourseMenuImpl implements CourseMenu {
 
-    private final CourseRepository courseRepository;
-    private final UserProgressRepository userProgressRepository;
+
     private final CourseService courseService;
 
-    public CourseMenuImpl(CourseRepository courseRepository, UserProgressRepository userProgressRepository, CourseService courseService) {
-        this.courseRepository = courseRepository;
-        this.userProgressRepository = userProgressRepository;
+    public CourseMenuImpl(CourseService courseService) {
         this.courseService = courseService;
     }
 
     @Override
-    public void getCourseMenu(final User user) {
+    public void getCourseMenu(int userId) {
 
         boolean tokenMenu = true;
 
@@ -41,10 +35,10 @@ public class CourseMenuImpl implements CourseMenu {
             int menuChoise = menu.nextInt();
             switch (menuChoise) {
                 case 1:
-                    courseService.getAllCourses(courseRepository);
+                    courseService.getAllCourses();
                     break;
                 case 2:
-                    List<Integer> ids = courseService.getCourseListByUsersId(user);
+                    List<Integer> ids = courseService.getCourseListByUsersId(userId);
                     List<Course> courses = courseService.getCoursesByListId(ids);
                     if (courses.isEmpty()){
                         System.out.println("\n You don't start any courses!\n");
@@ -52,15 +46,15 @@ public class CourseMenuImpl implements CourseMenu {
                     }else {
                         System.out.println("\n You can continue follow course(s):\n");
                         courseService.getStartedCourses(courses);
-                        courseService.startLesson(user);
+                        courseService.startLesson(userId);
                         break;
                     }
                 case 3:
-                    courseService.getAllCourses(courseRepository);
-                    courseService.startLesson(user);
+                    courseService.getAllCourses();
+                    courseService.startLesson(userId);
                     break;
                 case 4:
-                    courseService.getUserProgress(user);
+                    courseService.getUserProgress(userId);
                     break;
                 case 0:
                     tokenMenu = false;
