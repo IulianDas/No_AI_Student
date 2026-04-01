@@ -40,7 +40,8 @@ public class AdminServiceImpl implements AdminService {
                     "\n What you want to update: " +
                     "\n\t 1) Course Name" +
                     "\n\t 2) Course lessons" +
-                    "\n\t 3) Lesson quiz" +
+                    "\n\t 3) Add lessons" +
+                    "\n\t 4) Lesson quiz" +
                     "\n 0) Back to Menu" +
                     "\n------------------------------------\n");
 
@@ -62,6 +63,11 @@ public class AdminServiceImpl implements AdminService {
                     lessonRepository.updateLesson(courseId, lessonId);
                     break;
                 case 3:
+                    lessonId = lessonRepository.addLesson(courseId);
+                    lessonId = quizRepository.createQuiz(lessonId);
+                    questionRepository.createQuestion(lessonId);
+                    break;
+                case 4:
                     System.out.println("\n Quiz of what lesson you want to update: \n");
                     lessonRepository.getLessonsByCourseId(courseId)
                             .stream()

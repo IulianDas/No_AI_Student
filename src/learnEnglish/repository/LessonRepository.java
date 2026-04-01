@@ -13,4 +13,6 @@ public interface LessonRepository {
     void updateLesson(int courseId, int lessonId);
 
     void removeLessonById(int courseId);
+
+    public int addLesson(int courseId);
 }
