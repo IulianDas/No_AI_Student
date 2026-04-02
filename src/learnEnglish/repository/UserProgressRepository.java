@@ -10,6 +10,5 @@ public interface UserProgressRepository {
     void saveUserProgress(UserProgress userProgress);
     void updateUserProgress(UserProgress userProgress);
     int getLastId();
-
     UserProgress getCourseProgressByUserIdAndCourseId(int id, int courseId);
 }

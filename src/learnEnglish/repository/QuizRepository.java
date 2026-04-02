@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface QuizRepository {
 
-    int createQuiz(int lessonId);
+    void createQuiz(Quiz newQuiz);
     List<Quiz> getAllQuiz();
     void removeQuiz(int lessonId);
     Quiz getQuizByLessonId(int lessonId);

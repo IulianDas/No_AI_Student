@@ -5,7 +5,6 @@ import learnEnglish.repository.QuestionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class QuestionRepositoryImpl implements QuestionRepository {
 
@@ -19,20 +18,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public void createQuestion(int quizId) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n Introduce the question: \n");
-        String question = scanner.nextLine();
-        System.out.println("\n Introduce 4 variants of response and 1 of them should be true: \n");
-        String[] responseVariants = new String[4];
-        for (int i = 0; i <= 3; i++){
-            System.out.println("\n\t [" + i +"] ");
-            responseVariants[i] = " "+i+")" + scanner.nextLine();
-        }
-        System.out.println("\n Introduce number id of correct answer: \n");
-        int answer = scanner.nextInt();
-        int questionNewId = questions.getLast().getId()+1;
-        questions.add( new Question(questionNewId,question, answer, responseVariants, quizId));
+    public void createQuestion(Question newQuestion) {
+        questions.add( newQuestion);
     }
 
     @Override
@@ -52,25 +39,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public void updateQuestion(int id) {
+    public void updateQuestion(int indexPosition, Question updatedQuestion) {
+        questions.set(indexPosition, updatedQuestion);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n Introduce the new question: \n");
-        String newQuestion = scanner.nextLine();
-        System.out.println("\n Introduce 4 variants of response and 1 of them should be true: \n");
-        String[] responseVariants = new String[4];
-        for (int i = 0; i <= 3; i++){
-            System.out.println("\n\t [" + i +"] ");
-            responseVariants[i] = " "+i+")" + scanner.nextLine();
-        }
-        System.out.println("\n Introduce number id of correct answer: \n");
-        int answer = scanner.nextInt();
-        int questionId = questions.stream().filter(question -> question.getQuizId() == id).findFirst().get().getId();
-        int indexOfQuestion = questions.indexOf(questions
-                .stream()
-                .filter(question ->  question.getQuizId() == id)
-                .findFirst().get());
-        questions.set(indexOfQuestion, (new Question(questionId, newQuestion, answer, responseVariants, id)));
-        System.out.println("\n Question is updated!");
     }
 }

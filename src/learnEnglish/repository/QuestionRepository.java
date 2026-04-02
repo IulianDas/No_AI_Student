@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface QuestionRepository {
 
-    void  createQuestion(int quizId);
+    void  createQuestion(Question newQuestion);
     List<Question> getAllQuestion();
     List<Question> getAllQuestionByQuizId(int id);
     void removeQuestion(int quizId);
 
-    void updateQuestion(int id);
+    void updateQuestion(int id, Question updatedQusetion);
 }

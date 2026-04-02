@@ -5,7 +5,6 @@ import learnEnglish.repository.LessonRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LessonRepositoryImpl implements LessonRepository {
 
@@ -30,51 +29,14 @@ public class LessonRepositoryImpl implements LessonRepository {
     }
 
     @Override
-    public int createLesson(int courseId) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n Introduce Name of the lesson: \n");
-        String topic = scanner.nextLine();
-        System.out.println("\n Introduce description of the lesson: \n");
-        String description = scanner.nextLine();
-        System.out.println("\n Introduce rules or additional information: \n");
-        String paragraph = scanner.nextLine();
-        int lessonNewId = lessons.getLast().getId()+1;
-        lessons.add( new Lesson(lessonNewId, 1, topic, description, paragraph, courseId));
-        return lessonNewId;
-    }
-    @Override
-    public int addLesson(int courseId) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n Introduce Name of the lesson: \n");
-        String topic = scanner.nextLine();
-        System.out.println("\n Introduce description of the lesson: \n");
-        String description = scanner.nextLine();
-        System.out.println("\n Introduce rules or additional information: \n");
-        String paragraph = scanner.nextLine();
-        int lessonOrder = lessons.stream()
-                .filter(lesson -> lesson.getCourseId() == courseId)
-                .mapToInt(Lesson::getLessonOrder)
-                .max().getAsInt() + 1;
-        int lessonNewId = lessons.getLast().getId() + 1;
-        lessons.add( new Lesson(lessonNewId, lessonOrder, topic, description, paragraph, courseId));
-        return lessonNewId;
+    public void createLesson(Lesson newLesson) {
+
+        lessons.add(newLesson);
     }
 
     @Override
-    public void updateLesson(int courseId, int lessonId) {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n Introduce Name of the lesson: \n");
-        String topic = scanner.nextLine();
-        System.out.println("\n Introduce description of the lesson: \n");
-        String description = scanner.nextLine();
-        System.out.println("\n Introduce rules or additional information: \n");
-        String paragraph = scanner.nextLine();
-        int indexOfLesson = lessons.indexOf(lessons.get(courseId));
-        int orderId = lessons.get(indexOfLesson).getLessonOrder();
-        Lesson newLesson = new Lesson(lessonId, orderId, topic, description, paragraph, courseId);
-        lessons.set(indexOfLesson, newLesson);
-        System.out.println("\n Lesson is updated!");
+    public void updateLesson(int indexPos, Lesson updatedLesson) {
+        lessons.set(indexPos, updatedLesson);
     }
 
     @Override

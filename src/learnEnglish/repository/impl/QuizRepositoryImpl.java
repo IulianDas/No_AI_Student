@@ -18,10 +18,8 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
-    public int createQuiz(int lessonId) {
-        int newQuizId = quizzes.getLast().getId()+1;
-        quizzes.add(new Quiz( newQuizId, lessonId));
-        return newQuizId;
+    public void createQuiz(Quiz newQuiz) {
+        quizzes.add(newQuiz);
     }
 
     @Override

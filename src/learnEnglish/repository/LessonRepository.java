@@ -7,12 +7,9 @@ import java.util.List;
 public interface LessonRepository {
 
     List<Lesson> getLessons();
-    int createLesson(int courseId);
+    void createLesson(Lesson newLesson);
     List<Lesson> getLessonsByCourseId(int courseId);
-
-    void updateLesson(int courseId, int lessonId);
-
+    void updateLesson(int indexPosition, Lesson updatedLesson);
     void removeLessonById(int courseId);
 
-    public int addLesson(int courseId);
 }

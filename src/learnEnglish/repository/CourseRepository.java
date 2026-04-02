@@ -7,9 +7,9 @@ import java.util.List;
 public interface CourseRepository {
     Course getCourse(int courseId);
     List<Course> getAllCourses();
-    int createNewCourse();
+    void createNewCourse(Course newCourse);
     void removeCourse(int courseId);
     List<Course> getAllInit();
-    void updateCourseName(int courseId, String updatedCourseName);
+    void updateCourseName(int indexPosition, Course updatedCourseName);
     List<Course> getAllCoursesByListId(List<Integer> ids);
 }
